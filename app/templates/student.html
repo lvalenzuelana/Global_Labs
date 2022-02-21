@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #34495E ;
+}
+.form-register {
+  width: 400px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 4px;
+  font-family: 'calibri';
+  color: white;
+  box-shadow: 7px 13px 37px #000;
+}
+
+.form-register h4 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.controls {
+  width: 100%;
+  background: #24303c;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  border: 1px solid #1f53c5;
+  font-family: 'calibri';
+  font-size: 18px;
+  color: white;
+}
+
+.form-register p {
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 40px;
+}
+
+.form-register a {
+  color: white;
+  text-decoration: none;
+}
+
+.form-register a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.form-register .botons {
+  width: 100%;
+  background: #1f53c5;
+  border: none;
+  padding: 12px;
+  color: white;
+  margin: 16px 0;
+  font-size: 16px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #24303c;
+}
+li {
+  float: left;
+}
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+li a:hover:not(.active) {
+  background-color: #24303c;
+}
+.active {
+  background-color: #24303c;
+}
+</style>
+  <title>Student</title>
+</head>
+{% block content %}
+<body>
+{% if request.user.is_authenticated %}
+<ul>
+  <li><a href="{% url 'logout' %}">Log Out</a></li>
+  <li style="float:right"><a class="active" href="">Welcome, {{request.user.username}}</a></li>
+</ul>
+<form action ="student" method="POST">
+    {% csrf_token %}
+  <section class="form-register">
+    <h4>Search PDF</h4>
+    	<select class="controls" name="search" placeholder = "Please Select Your Search Method:">
+    	<option value="" disabled selected>Please Select Your Search Method:</option>
+   		<option value="Title">Title </option> 
+	</select>
+    <input class="controls" type="text" name="input" id="input" placeholder="Enter Your Search Value">
+    <input class="botons" type="submit" value="Search">
+  </section>
+</form>
+{% else %}
+{% endif %}
+</body>
+{% endblock %}
+</html>
